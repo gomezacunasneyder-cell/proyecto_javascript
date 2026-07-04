@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario - Acme</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/session.js" defer></script>
+  <script src="js/inventario.js" defer></script>
+</head>
+<body>
+  <header class="barra-navegacion">
+    <div class="logo">
+      <h1>Orbit PC <span>Store</span></h1>
+    </div>
+    <nav>
+      <ul class="enlaces-nav">
+        <li><a href="usuarios.html">Usuarios</a></li>
+        <li><a href="inventario.html" class="activo">Inventario</a></li>
+        <li><a href="produccion.html">Producción</a></li>
+      </ul>
+    </nav>
+    <div class="barra-sesion">
+      <span id="usuarioActivo"></span>
+      <button id="btnlogout">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <main class="contenido-principal">
+    <section class="contenedor-formulario">
+      <div class="tarjeta-formulario">
+        <h2>Registrar Nuevo Producto</h2>
+        <form id="formProducto">
+          <div class="grupo-formulario">
+            <label for="prodCodigo">Código del Producto:</label>
+            <input type="text" id="prodCodigo" placeholder="Ej: MP-001 o PR-001" required>
+          </div>
+
+          <div class="grupo-formulario">
+            <label for="prodNombre">Nombre:</label>
+            <input type="text" id="prodNombre" placeholder="Ej: Harina de trigo" required>
+          </div>
+
+          <div class="grupo-formulario">
+            <label for="prodTipo">Tipo de Producto:</label>
+            <select id="prodTipo" required>
+              <option value="" disabled selected>Seleccione una opción</option>
+              <option value="Materia Prima">Materia Prima</option>
+              <option value="Producto Terminado">Producto Terminado (Fabricado)</option>
+            </select>
+          </div>
+
+          <div class="grupo-formulario" id="contenedorProveedor">
+            <label for="prodProveedor">Proveedor:</label>
+            <input type="text" id="prodProveedor" placeholder="Ej: Distribuidora Acme">
+          </div>
+
+          <div class="grupo-formulario" id="seccionFormula" style="display: none;">
+            <h3>Fórmula / Receta del Producto</h3>
+            <div id="listaInsumosFormula">
+              </div>
+            <button type="button" id="btnAgregarInsumo" class="btn-secundario">+ Añadir Insumo a la Receta</button>
+          </div>
+
+          <button type="submit" id="btnGuardarProducto">Registrar Producto</button>
+        </form>
+      </div>
+
+      <div class="tarjeta-tabla" style="margin-top: 30px;">
+        <div class="encabezado-tabla">
+          <h2>Lista de Productos e Inventario</h2>
+          <input type="text" id="buscadorProducto" placeholder="Buscar por código o nombre...">
+        </div>
+        
+        <table id="tablaInventario">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Proveedor / Tipo</th>
+              <th>Stock Actual</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoTablaInventario"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
