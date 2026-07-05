@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Manual Técnico y Guía del Proyecto: Acme Producción
 
 Este documento sirve como manual explicativo paso a paso sobre el funcionamiento, flujo y arquitectura de la aplicación de **Gestión de Producción de Acme** en la ciudad de Macondo.
@@ -64,3 +65,6 @@ El proyecto está modularizado para separar las responsabilidades de forma limpi
 * **`js/components.js` (Web Component):** Contiene el código de `<navbar-component>`. Este componente web genera el menú superior responsivo de forma dinámica en cada página e inicializa la lógica de visualización del usuario activo y el evento para cerrar sesión (`btnlogout`).
 * **`js/session.js` (Guardia de Seguridad):** Un script sumamente ligero que se ejecuta al inicio de todas las páginas administrativas. Si detecta que no hay una sesión activa, redirige inmediatamente a `login.html`, bloqueando accesos no autorizados.
 * **`css/styles.css` (Estilos y Responsividad):** Archivo central de estilos con reglas para la maquetación en tarjetas (`tarjeta-formulario`), modales y diseño responsive adaptable a tabletas y teléfonos mediante consultas de medios (`@media`).
+=======
+# proyecto_javascript
+>>>>>>> b9b51badbc3c74c3a3bb4bac4e114c0dade092d8
