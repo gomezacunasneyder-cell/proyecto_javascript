@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acme Producción - Módulo de Usuarios</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="data/api.js" defer></script>
+  <script src="data/dataManager.js" defer></script>
+  <script src="components/acme-navbar.js" defer></script>
+  <script src="components/acme-button.js" defer></script>
+  <script src="components/acme-input.js" defer></script>
+  <script src="components/acme-toast.js" defer></script>
+  <script src="modules/session.js" defer></script>
+  <script src="modules/usuarios.js" defer></script>
+</head>
+
+<body>
+
+  <acme-toast></acme-toast>
+  <acme-navbar active-page="usuarios"></acme-navbar>
+
+  <main class="contenido-principal">
+    <section id="seccion-usuarios" class="contenedor-formulario">
+
+      <div class="tarjeta-formulario">
+        <div class="encabezado-tabla">
+          <h2>Gestión de Usuarios</h2>
+          <acme-button id="btnAgregarUsuario" variant="primary">Agregar usuario</acme-button>
+        </div>
+        <table id="tablaUsuarios">
+          <thead>
+            <tr>
+              <th>Numero de identificacion</th>
+              <th>Nombre completo</th>
+              <th>Cargo</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoTablaUsuarios"></tbody>
+        </table>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- MODAL CREAR/EDITAR USUARIO -->
+  <div id="modalUsuario" class="modal hidden">
+    <div class="modal-contenido">
+      <h3 id="tituloFormulario">Crear usuario</h3>
+
+      <form id="formulario-usuario">
+        <input type="hidden" id="idOriginal">
+
+        <acme-input label="Número de Identificación" type="text" id="idNumber" name="idNumber"
+          placeholder="Ej. 1002345678" required></acme-input>
+        <acme-input label="Nombre Completo" type="text" id="fullName" name="fullName" placeholder="Ej. Stiven Gómez"
+          required></acme-input>
+        <acme-input label="Cargo" type="text" id="position" name="position" placeholder="Ej. Operario de producción"
+          required></acme-input>
+        <acme-input label="Contraseña" type="password" id="password" name="password" placeholder="••••••••"
+          minlength="6"></acme-input>
+        <acme-input label="Confirmar Contraseña" type="password" id="confirmPassword" name="confirmPassword"
+          placeholder="••••••••" minlength="6"></acme-input>
+
+        <p class="mensaje-error" id="mensajeError"></p>
+
+        <div class="acciones-modal">
+          <acme-button type="submit" id="btn-guardar" variant="primary">Guardar</acme-button>
+          <acme-button type="button" id="btncancelar" variant="secondary">Cancelar</acme-button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>

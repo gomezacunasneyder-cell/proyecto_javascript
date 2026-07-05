@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Producción - Acme</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="data/api.js" defer></script>
+  <script src="data/dataManager.js" defer></script>
+  <script src="components/acme-navbar.js" defer></script>
+  <script src="components/acme-button.js" defer></script>
+  <script src="components/acme-input.js" defer></script>
+  <script src="components/acme-toast.js" defer></script>
+  <script src="modules/session.js" defer></script>
+  <script src="modules/production.js" defer></script>
+</head>
+
+<body>
+  <acme-toast></acme-toast>
+  <acme-navbar active-page="produccion"></acme-navbar>
+
+  <main class="contenido-principal">
+    <section class="contenedor-formulario">
+
+      <div class="tarjeta-formulario">
+        <h2>Nueva Orden de Producción</h2>
+        <div class="grupo-input">
+          <label for="selectProductoFabricar">Producto a Fabricar:</label>
+          <select id="selectProductoFabricar"></select>
+        </div>
+
+        <acme-input label="Cantidad a Fabricar:" type="number" id="cantidadFabricar" value="1" min="1"
+          required></acme-input>
+
+        <acme-button type="button" id="btnAgregarOrden" variant="primary">+ Agregar a la orden</acme-button>
+      </div>
+
+      <div class="tarjeta-formulario">
+        <h2>Orden Actual</h2>
+        <table id="tablaOrden">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Insumos requeridos</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoTablaOrden"></tbody>
+        </table>
+        <div style="margin-top: 1.5rem;">
+          <acme-button type="button" id="btnRegistrarProduccion" variant="primary">Registrar Producción</acme-button>
+        </div>
+      </div>
+
+      <div class="tarjeta-formulario hidden" id="tarjetaResumen">
+        <h2>Resumen del Proceso #<span id="codigoResumen"></span></h2>
+        <div id="contenidoResumen"></div>
+      </div>
+
+      <div class="tarjeta-formulario">
+        <h2>Historial de Producción</h2>
+        <table id="tablaHistorial">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Fecha</th>
+              <th>Responsable</th>
+              <th>Productos</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoTablaHistorial"></tbody>
+        </table>
+      </div>
+
+    </section>
+  </main>
+</body>
+
+</html>

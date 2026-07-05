@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acme Producción - Registro</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="data/api.js" defer></script>
+  <script src="data/dataManager.js" defer></script>
+  <script src="components/acme-button.js" defer></script>
+  <script src="components/acme-input.js" defer></script>
+  <script src="components/acme-toast.js" defer></script>
+  <script src="modules/auth.js" defer></script>
+</head>
+<body>
+
+  <acme-toast></acme-toast>
+
+  <section class="contenedor-formulario">
+    <div class="tarjeta-formulario">
+      <h2>Registro de Usuario</h2>
+      <p class="subtitulo">Crea una cuenta nueva para acceder al sistema</p>
+
+      <form id="formularioRegistro">
+        <acme-input label="Número de Identificación" type="text" id="idNumber" required></acme-input>
+        <acme-input label="Nombre Completo" type="text" id="fullName" required></acme-input>
+        <acme-input label="Cargo" type="text" id="position" required></acme-input>
+        <acme-input label="Contraseña" type="password" id="password" required minlength="6"></acme-input>
+        <acme-input label="Confirmar Contraseña" type="password" id="confirmPassword" required minlength="6"></acme-input>
+
+        <acme-button type="submit" variant="primary">Registrarse</acme-button>
+      </form>
+
+      <p class="mensaje-error" id="mensajeError"></p>
+
+      <p class="subtitulo">
+        ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>
+      </p>
+    </div>
+  </section>
+
+</body>
+</html>
