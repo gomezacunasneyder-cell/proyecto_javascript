@@ -416,6 +416,18 @@ tbody tr:nth-child(even) {
   .barra-navegacion {
     padding: 1.1rem 1.25rem;
   }
+
+  /* Layout: stack columns into single column for smaller screens */
+  .contenedor-formulario {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding-top: 1.25rem;
+  }
+
+  /* Ensure the two tarjetas don't sit side-by-side */
+  .tarjeta-formulario {
+    width: 100%;
+  }
 }
 
 @media (max-width: 720px) {
@@ -458,6 +470,16 @@ tbody tr:nth-child(even) {
     overflow-x: auto;
     white-space: nowrap;
   }
+
+  /* Make table and controls more compact on tablets and phones */
+  th, td {
+    padding: 0.75rem 0.9rem;
+  }
+
+  .encabezado-tabla input {
+    width: 100%;
+    max-width: 360px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -483,6 +505,20 @@ tbody tr:nth-child(even) {
   #btnSumarStock,
   #btnRestarStock {
     width: 100%;
+  }
+
+  /* Make form fields and table fit phone screens better */
+  .grupo-input input,
+  .grupo-input select,
+  input[type='number'],
+  textarea {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.95rem;
+  }
+
+  .tarjeta-formulario {
+    padding: 1rem;
+    border-radius: 20px;
   }
 
   .celda-acciones {
