@@ -228,8 +228,8 @@ function agregarFilaInsumo() {
 function configurarBotonesStock() {
   const btnSumar = document.getElementById('btnSumarStock');
   const btnRestar = document.getElementById('btnRestarStock');
-  if (btnSumar) btnSumar.addEventListener('click', () => modificarStockExistente('sumar'));
-  if (btnRestar) btnRestar.addEventListener('click', () => modificarStockExistente('restar'));
+  if (btnSumar) btnSumar.addEventListener('click', () => handleStockButton('sumar'));
+  if (btnRestar) btnRestar.addEventListener('click', () => handleStockButton('restar'));
 }
 
 async function modificarStockExistente(operacion) {
@@ -255,6 +255,38 @@ async function modificarStockExistente(operacion) {
   } catch (error) {
     console.error("Error al conectar con Firebase:", error);
   }
+}
+
+function handleStockButton(operacion) {
+  // Si existe un código y el producto está en la lista, ejecutar la modificación remota
+  const codigo = document.getElementById('prodCodigo').value.trim().toUpperCase();
+  const stockIngresado = parseFloat(document.getElementById('prodStock').value);
+
+  const productoExistente = listaProductosLocal.find(p => p && p.codigo === codigo);
+  if (codigo && productoExistente) {
+    // usar la ruta que parchea Firebase
+    modificarStockExistente(operacion);
+    return;
+  }
+
+  // Si no hay producto existente, ajustar el input localmente
+  const inputStock = document.getElementById('prodStock');
+  if (!inputStock) return;
+
+  // Determinar paso (step) si existe, sino usar 1
+  let step = 1;
+  try {
+    const stepAttr = inputStock.getAttribute('step');
+    if (stepAttr && stepAttr !== 'any') step = parseFloat(stepAttr) || 1;
+  } catch (e) { /* ignore */ }
+
+  const current = Number(inputStock.value) || 0;
+  let next = operacion === 'sumar' ? current + step : current - step;
+  if (next < 0) next = 0;
+
+  // Si step es entero, mostrar entero; si no, mantener decimales del step
+  if (Number.isInteger(step)) inputStock.value = String(Math.round(next));
+  else inputStock.value = String(Number(next.toFixed(6)).toString());
 }
 
 if (formProducto) {

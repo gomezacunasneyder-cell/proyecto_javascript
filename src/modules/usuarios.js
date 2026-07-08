@@ -142,6 +142,13 @@ if (formulario) {
       return;
     }
 
+    // Validar que el nombre sólo contenga letras (incluye acentos) y espacios
+    const nombreValido = /^[A-Za-zÀ-ÿ\s]+$/.test(fullName);
+    if (!nombreValido) {
+      window.showToast("El nombre completo sólo puede contener letras y espacios.", "error");
+      return;
+    }
+
     if (!['Jefe', 'Usuario'].includes(position)) {
       window.showToast("El cargo debe ser Jefe o Usuario.", "error");
       return;
@@ -192,3 +199,15 @@ if (formulario) {
 if (cuerpoTabla) {
   listarUsuarios();
 }
+
+// Real-time input cleaning for Nombre Completo (permitir solo letras y espacios)
+document.addEventListener('DOMContentLoaded', () => {
+  const fullNameInput = document.getElementById('fullName');
+  if (!fullNameInput) return;
+
+  fullNameInput.addEventListener('input', () => {
+    const current = fullNameInput.value || '';
+    const cleaned = current.replace(/[^A-Za-zÀ-ÿ\s]/g, '');
+    if (current !== cleaned) fullNameInput.value = cleaned;
+  });
+});

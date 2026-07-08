@@ -48,19 +48,26 @@ class AcmeInput extends HTMLElement {
           color: #334155;
         }
         input {
-          width: 100%; 
-          padding: 0.7rem; 
-          border: 1px solid #e2e8f0; 
-          border-radius: 8px; 
+          width: 100%;
+          padding: 0.85rem 0.95rem;
+          border: 1px solid rgba(124,58,237,0.18);
+          border-radius: 14px;
           outline: none;
           box-sizing: border-box;
-          color: #334155;
+          color: #2b2b3c;
+          background: rgba(255,255,255,0.98);
           font-size: 0.95rem;
         }
-        input:focus { border-color: #93c5fd; }
+        input::placeholder {
+          color: rgba(94, 76, 137, 0.55);
+        }
+        input:focus {
+          border-color: rgba(139,92,246,0.65);
+          box-shadow: 0 0 0 4px rgba(196,181,253,0.18);
+        }
         input:disabled {
-          background-color: #f1f5f9;
-          color: #94a3b8;
+          background-color: #f7f4ff;
+          color: #8f86a8;
           cursor: not-allowed;
         }
       </style>

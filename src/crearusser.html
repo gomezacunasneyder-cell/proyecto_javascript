@@ -41,10 +41,25 @@
       <p class="mensaje-error" id="mensajeError"></p>
 
       <p class="subtitulo">
-        ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>
+        ¿Ya tienes cuenta? <a href="index.html">Inicia sesión aquí</a>
       </p>
     </div>
   </section>
+
+  <script>
+    // Evitar que el campo Nombre completo acepte números mientras se escribe
+    document.addEventListener('DOMContentLoaded', () => {
+      const fullName = document.getElementById('fullName');
+      if (!fullName) return;
+
+      fullName.addEventListener('input', () => {
+        // `acme-input` expone .value; eliminamos dígitos si el usuario los escribe
+        const current = fullName.value || '';
+        const cleaned = current.replace(/[0-9]/g, '');
+        if (current !== cleaned) fullName.value = cleaned;
+      });
+    });
+  </script>
 
 </body>
 </html>

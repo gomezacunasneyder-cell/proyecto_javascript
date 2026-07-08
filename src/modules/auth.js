@@ -59,6 +59,14 @@ if (formularioRegistro) {
       return;
     }
 
+    // Validar que el nombre no contenga números ni caracteres inválidos
+    // Permitir letras (incluye acentos) y espacios
+    const nombreValido = /^[A-Za-zÀ-ÿ\s]+$/.test(fullName);
+    if (!nombreValido) {
+      window.showToast("El nombre completo sólo puede contener letras y espacios.", "error");
+      return;
+    }
+
     if (password !== confirmPassword) {
       window.showToast("Las contraseñas no coinciden", "error");
       return;

@@ -90,7 +90,7 @@ class AcmeNavbar extends HTMLElement {
     if (btnLogout) {
       btnLogout.addEventListener('click', () => {
         sessionStorage.removeItem("acme_produccion_sesion");
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       });
     }
   }
