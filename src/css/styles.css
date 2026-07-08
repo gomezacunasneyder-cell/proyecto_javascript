@@ -84,6 +84,20 @@ button, .acme-button, .acme-btn-primary, .acme-btn-secondary {
   padding: 2rem;
 }
 
+/* Center login page form when used alone */
+#seccion-login {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 3rem;
+}
+
+#seccion-login .tarjeta-formulario {
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 h1, h2, h3, h4 {
   color: #2c1f4c;
 }
