@@ -43,6 +43,22 @@ if (formularioRegistro) {
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
+    // Validar que la identificación sea sólo dígitos
+    if (!/^[0-9]+$/.test(idNumber)) {
+      window.showToast("El número de identificación debe contener sólo dígitos.", "error");
+      return;
+    }
+
+    if (!['Jefe', 'Usuario'].includes(position)) {
+      window.showToast("El cargo debe ser Jefe o Usuario.", "error");
+      return;
+    }
+
+    if (!fullName) {
+      window.showToast("El nombre completo no puede estar vacío ni contener solo espacios.", "error");
+      return;
+    }
+
     if (password !== confirmPassword) {
       window.showToast("Las contraseñas no coinciden", "error");
       return;

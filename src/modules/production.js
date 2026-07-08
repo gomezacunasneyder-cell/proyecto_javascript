@@ -25,15 +25,16 @@ const cargarProductos = async () => {
 if (btnAgregarOrden) {
   btnAgregarOrden.addEventListener("click", () => {
     const codigo = selectProducto.value;
-    const cantidad = Number(document.getElementById("cantidadFabricar").value);
+    const valorCantidad = document.getElementById("cantidadFabricar").value.trim();
+    const cantidad = Number(valorCantidad);
     const producto = productos.find(p => p.codigo === codigo);
 
     if (!producto || !producto.formula) {
       window.showToast("Este producto no tiene fórmula registrada.", "error");
       return;
     }
-    if (cantidad <= 0) {
-      window.showToast("La cantidad debe ser mayor a cero.", "error");
+    if (!valorCantidad || !Number.isFinite(cantidad) || cantidad < 1) {
+      window.showToast("La cantidad debe ser un número mayor o igual a 1.", "error");
       return;
     }
 

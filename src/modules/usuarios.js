@@ -134,11 +134,31 @@ if (formulario) {
     event.preventDefault();
 
     const esEdicion = idOriginalInput.value !== "";
+    const fullName = document.getElementById("fullName").value.trim();
+    const position = document.getElementById("position").value.trim();
+
+    if (!fullName) {
+      window.showToast("El nombre completo no puede estar vacío ni contener solo espacios.", "error");
+      return;
+    }
+
+    if (!['Jefe', 'Usuario'].includes(position)) {
+      window.showToast("El cargo debe ser Jefe o Usuario.", "error");
+      return;
+    }
+
+    const idNumber = document.getElementById("idNumber").value.trim();
+
+    // Validar que la identificación sea sólo dígitos
+    if (!/^[0-9]+$/.test(idNumber)) {
+      window.showToast("El número de identificación debe contener sólo dígitos.", "error");
+      return;
+    }
 
     const datos = {
-      idNumber: document.getElementById("idNumber").value.trim(),
-      fullName: document.getElementById("fullName").value.trim(),
-      position: document.getElementById("position").value.trim(),
+      idNumber,
+      fullName,
+      position,
       password: document.getElementById("password").value,
       confirmPassword: document.getElementById("confirmPassword").value
     };

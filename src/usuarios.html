@@ -53,12 +53,18 @@
       <form id="formulario-usuario">
         <input type="hidden" id="idOriginal">
 
-        <acme-input label="Número de Identificación" type="text" id="idNumber" name="idNumber"
-          placeholder="Ej. 1002345678" required></acme-input>
+        <acme-input label="Número de Identificación" type="number" id="idNumber" name="idNumber"
+          placeholder="Ej. 1002345678" required min="0" step="1"></acme-input>
         <acme-input label="Nombre Completo" type="text" id="fullName" name="fullName" placeholder="Ej. Stiven Gómez"
           required></acme-input>
-        <acme-input label="Cargo" type="text" id="position" name="position" placeholder="Ej. Operario de producción"
-          required></acme-input>
+        <div class="grupo-input">
+          <label for="position">Cargo</label>
+          <select id="position" name="position" required>
+            <option value="">Seleccione un cargo</option>
+            <option value="Jefe">Jefe</option>
+            <option value="Usuario">Usuario</option>
+          </select>
+        </div>
         <acme-input label="Contraseña" type="password" id="password" name="password" placeholder="••••••••"
           minlength="6"></acme-input>
         <acme-input label="Confirmar Contraseña" type="password" id="confirmPassword" name="confirmPassword"

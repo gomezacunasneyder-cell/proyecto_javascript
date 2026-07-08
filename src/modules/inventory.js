@@ -234,10 +234,10 @@ function configurarBotonesStock() {
 
 async function modificarStockExistente(operacion) {
   const codigo = document.getElementById('prodCodigo').value.trim().toUpperCase();
-  const stockIngresado = parseFloat(document.getElementById('prodStock').value) || 0;
+  const stockIngresado = parseFloat(document.getElementById('prodStock').value);
 
   if (!codigo) return window.showToast("⚠️ Ingresa el Código del Producto.", "error");
-  if (stockIngresado <= 0) return window.showToast("⚠️ Ingresa una cantidad mayor a 0.", "error");
+  if (!Number.isFinite(stockIngresado) || stockIngresado <= 0) return window.showToast("⚠️ Ingresa una cantidad mayor a 0.", "error");
 
   const productoExistente = listaProductosLocal.find(p => p && p.codigo === codigo);
   if (!productoExistente) return window.showToast(`❌ El producto "${codigo}" no existe.`, "error");
@@ -265,7 +265,11 @@ if (formProducto) {
     const nombre = document.getElementById('prodNombre').value.trim();
     const tipo = selectTipo.value;
     const unidad = document.getElementById('prodUnidad').value;
-    const stockIngresado = parseFloat(document.getElementById('prodStock').value) || 0;
+    const stockIngresado = parseFloat(document.getElementById('prodStock').value);
+
+    if (!Number.isFinite(stockIngresado) || stockIngresado < 0) {
+      return window.showToast("⚠️ El stock no puede ser negativo.", "error");
+    }
 
     const productoExistente = listaProductosLocal.find(p => p && p.codigo === codigo);
     if (productoExistente && !esEdicion) {
