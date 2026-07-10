@@ -10,20 +10,33 @@ class AcmeNavbar extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>
         .barra-navegacion {
-          background-color: #ffffff;
+          background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(239,247,255,0.95));
           display: flex;
           justify-content: space-between;
           align-items: center;
           padding: 1rem 2rem;
-          border-bottom: 1px solid #e2e8f0;
+          border-bottom: 1px solid rgba(139, 92, 246, 0.16);
           font-family: 'Segoe UI', system-ui, sans-serif;
+          box-shadow: 0 10px 26px rgba(112, 76, 210, 0.08);
+        }
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
+        }
+        .logo-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 16px;
+          padding: 0.25rem;
+          background: linear-gradient(135deg, #f5f3ff, #e0f2fe);
         }
         .logo h1 {
-          font-size: 1.5rem;
+          font-size: 1.3rem;
           margin: 0;
           color: #334155;
         }
-        .logo h1 span { color: #93c5fd; }
+        .logo h1 span { color: #7c3aed; }
         .enlaces-nav { display: flex; list-style: none; gap: 1.5rem; margin: 0; padding: 0; }
         .enlaces-nav a { 
           text-decoration: none; 
@@ -58,7 +71,8 @@ class AcmeNavbar extends HTMLElement {
       </style>
       <header class="barra-navegacion">
         <div class="logo">
-          <h1>Acme <span>Producción</span></h1>
+          <img src="src/assets/acme-logo.svg" alt="Logo ACME" class="logo-icon">
+          <h1>Planta Macondo <span>ACME</span></h1>
         </div>
         <nav>
           <ul class="enlaces-nav">

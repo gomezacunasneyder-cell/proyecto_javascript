@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orbit PC Store - Inicio de Sesión</title>
+  <title>Planta Macondo ACME | Gestión de Producción</title>
   <link rel="stylesheet" href="src/css/styles.css">
   <script src="src/data/api.js" defer></script>
   <script src="src/data/dataManager.js" defer></script>
@@ -15,9 +15,16 @@
   <acme-toast></acme-toast>
 
   <section id="seccion-login" class="contenedor-formulario">
-    <div class="tarjeta-formulario">
-      <h2>Iniciar Sesión</h2>
-      <p class="subtitulo">Ingresa a Orbit PC Store para gestionar tus compras</p>
+    <div class="tarjeta-formulario login-card">
+      <div class="login-brand">
+        <img src="src/assets/acme-logo.svg" alt="Logo ACME" class="login-logo">
+        <div>
+          <h2>Planta Macondo ACME</h2>
+          <p class="subtitulo">Gestión de producción y control de inventario</p>
+        </div>
+      </div>
+
+      <p class="subtitulo">Inicia sesión para administrar tus operaciones</p>
 
       <form id="formularioLogin">
         <div class="grupo-input">
@@ -30,7 +37,7 @@
           <input type="password" id="contrasena" name="contrasena" placeholder="••••••••" required>
         </div>
 
-        <button type="submit" id="btn-login">Ingresar</button>
+        <button type="submit" id="btn-login">Ingresar al sistema</button>
       </form>
 
       <p class="mensaje-error" id="mensajeError"></p>

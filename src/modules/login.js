@@ -12,7 +12,7 @@ formularioLogin.addEventListener("submit", async (event) => {
 
   if (resultUser != null) {
     if (contrasena === resultUser.password) {
-      sessionStorage.setItem("orbit_pc_sesion", JSON.stringify(resultUser));
+      sessionStorage.setItem("acme_produccion_sesion", JSON.stringify(resultUser));
       window.location.href = "usuarios.html";
     }
     else {
