@@ -80,10 +80,13 @@
         </form>
       </div>
 
-      <div class="tarjeta-formulario" style="margin-top: 30px; max-width: 800px;">
+      <div class="tarjeta-formulario" style="margin-top: 30px;">
         <div class="encabezado-tabla">
           <h2>Lista de Productos e Inventario</h2>
-          <input type="text" id="buscadorProducto" placeholder="Buscar por código o nombre...">
+          <div>
+            <input type="text" id="buscadorProducto" placeholder="Buscar por código o nombre...">
+            <p class="nota" id="inventarioNota">Mostrando los primeros 5 productos. Busca para ver más resultados.</p>
+          </div>
         </div>
 
         <table id="tablaInventario">

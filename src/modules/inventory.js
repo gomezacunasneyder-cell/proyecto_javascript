@@ -3,6 +3,7 @@ let esEdicion = false;
 
 const cuerpoTabla = document.getElementById('cuerpoTablaInventario');
 const buscador = document.getElementById('buscadorProducto');
+const inventarioNota = document.getElementById('inventarioNota');
 const formProducto = document.getElementById('formProducto');
 const selectTipo = document.getElementById('prodTipo');
 const contenedorProveedor = document.getElementById('contenedorProveedor');
@@ -32,10 +33,16 @@ function renderizarTabla(productos) {
   cuerpoTabla.innerHTML = '';
   if (productos.length === 0) {
     cuerpoTabla.innerHTML = `<tr><td colspan="5">No se encontraron productos</td></tr>`;
+    if (inventarioNota) inventarioNota.textContent = "No se encontraron productos.";
     return;
   }
 
-  productos.forEach(prod => {
+  const filtroActivo = buscador && buscador.value.trim().length > 0;
+  const mostrarProductos = (!filtroActivo && productos.length > 5)
+    ? productos.slice(0, 5)
+    : productos;
+
+  mostrarProductos.forEach(prod => {
     if (!prod || !prod.codigo) return;
     const fila = document.createElement('tr');
     const unidad = prod.unidad || 'ud';
@@ -51,6 +58,16 @@ function renderizarTabla(productos) {
     `;
     cuerpoTabla.appendChild(fila);
   });
+
+  if (inventarioNota) {
+    if (filtroActivo) {
+      inventarioNota.textContent = `Mostrando ${mostrarProductos.length} de ${productos.length} productos encontrados.`;
+    } else if (productos.length > 5) {
+      inventarioNota.textContent = `Mostrando 5 de ${productos.length} productos. Busca para ver más resultados.`;
+    } else {
+      inventarioNota.textContent = `Mostrando ${productos.length} productos.`;
+    }
+  }
 
   // Event Listeners para Editar
   document.querySelectorAll('.btn-editar-producto').forEach(btn => {
@@ -361,11 +378,32 @@ if (formProducto) {
 
 function limpiarFormulario() {
   esEdicion = false;
-  document.getElementById('prodCodigo').disabled = false;
+  const prodCodigo = document.getElementById('prodCodigo');
+  const prodNombre = document.getElementById('prodNombre');
+  const prodStock = document.getElementById('prodStock');
+  const prodProveedor = document.getElementById('prodProveedor');
+  const prodUnidad = document.getElementById('prodUnidad');
+  const prodTipo = document.getElementById('prodTipo');
+
+  if (prodCodigo) {
+    prodCodigo.disabled = false;
+    prodCodigo.value = '';
+  }
+  if (prodNombre) prodNombre.value = '';
+  if (prodStock) prodStock.value = '0';
+  if (prodProveedor) prodProveedor.value = '';
+  if (prodUnidad) prodUnidad.value = '';
+  if (prodTipo) prodTipo.value = '';
+
   if (formProducto) formProducto.reset();
   if (contenedorProveedor) contenedorProveedor.style.display = 'block';
   if (seccionFormula) seccionFormula.style.display = 'none';
   if (listaInsumosFormula) listaInsumosFormula.innerHTML = '';
+
+  document.querySelectorAll('acme-input').forEach(component => {
+    if (typeof component.reset === 'function') component.reset();
+  });
+
   if (btnGuardarProducto) {
     btnGuardarProducto.textContent = "Registrar Producto Nuevo";
   }

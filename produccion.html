@@ -21,9 +21,9 @@
   <acme-navbar active-page="produccion"></acme-navbar>
 
   <main class="contenido-principal">
-    <section class="contenedor-formulario">
+    <section class="contenedor-formulario contenedor-produccion">
 
-      <div class="tarjeta-formulario">
+      <div class="tarjeta-formulario" id="tarjetaNuevaOrden">
         <h2>Nueva Orden de Producción</h2>
         <div class="grupo-input">
           <label for="selectProductoFabricar">Producto a Fabricar:</label>
@@ -33,34 +33,26 @@
         <acme-input label="Cantidad a Fabricar:" type="number" id="cantidadFabricar" value="1" min="1"
           required></acme-input>
 
-        <acme-button type="button" id="btnAgregarOrden" variant="primary">+ Agregar a la orden</acme-button>
-      </div>
+        <div class="info-produccion hidden" id="infoProduccion"></div>
 
-      <div class="tarjeta-formulario">
-        <h2>Orden Actual</h2>
-        <table id="tablaOrden">
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Insumos requeridos</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="cuerpoTablaOrden"></tbody>
-        </table>
-        <div style="margin-top: 1.5rem;">
+        <div class="contenedor-boton-registrar">
           <acme-button type="button" id="btnRegistrarProduccion" variant="primary">Registrar Producción</acme-button>
         </div>
       </div>
 
-      <div class="tarjeta-formulario hidden" id="tarjetaResumen">
-        <h2>Resumen del Proceso #<span id="codigoResumen"></span></h2>
-        <div id="contenidoResumen"></div>
+      <div class="tarjeta-formulario">
+        <h2>Top 5 Productos Más Fabricados</h2>
+        <p>Ranking de los productos con mayor cantidad total producida y la materia prima consumida por cada uno.</p>
+        <div id="contenedorRanking"></div>
       </div>
 
       <div class="tarjeta-formulario">
         <h2>Historial de Producción</h2>
+        <div class="grupo-input">
+          <label for="inputBuscarHistorial">Buscar historial</label>
+          <input id="inputBuscarHistorial" type="text" placeholder="Buscar código, fecha, responsable o producto...">
+        </div>
+        <p class="nota" id="historialNota">Mostrando los primeros registros. Busca para ver más resultados.</p>
         <table id="tablaHistorial">
           <thead>
             <tr>

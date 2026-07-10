@@ -24,6 +24,11 @@ class AcmeInput extends HTMLElement {
     if (input) input.disabled = val;
   }
 
+  reset() {
+    const input = this.shadowRoot.querySelector('input');
+    if (input) input.value = '';
+  }
+
   connectedCallback() {
     const label = this.getAttribute('label') || '';
     const type = this.getAttribute('type') || 'text';
