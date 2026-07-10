@@ -316,9 +316,15 @@ if (formProducto) {
     const unidad = document.getElementById('prodUnidad').value;
     const stockIngresado = parseFloat(document.getElementById('prodStock').value);
 
-    if (!Number.isFinite(stockIngresado) || stockIngresado < 0) {
-      return window.showToast("⚠️ El stock no puede ser negativo.", "error");
-    }
+      // Validaciones básicas: código, nombre, tipo y unidad requeridos
+      if (!codigo) return window.showToast("⚠️ El código del producto es obligatorio.", "error");
+      if (!nombre) return window.showToast("⚠️ El nombre del producto es obligatorio.", "error");
+      if (!tipo) return window.showToast("⚠️ Selecciona el tipo de producto.", "error");
+      if (!unidad) return window.showToast("⚠️ Selecciona la unidad de medida.", "error");
+
+      if (!Number.isFinite(stockIngresado) || stockIngresado < 0) {
+        return window.showToast("⚠️ El stock no puede ser negativo.", "error");
+      }
 
     const productoExistente = listaProductosLocal.find(p => p && p.codigo === codigo);
     if (productoExistente && !esEdicion) {
@@ -359,7 +365,7 @@ if (formProducto) {
           return window.showToast("⚠️ Tienes insumos repetidos en la fórmula.", "error");
         }
 
-        if (formula.length === 0) return window.showToast("Agrega al menos un insumo a la fórmula.", "error");
+        if (formula.length === 0) return window.showToast("⚠️ Agrega al menos un insumo a la fórmula.", "error");
         nuevoProducto.formula = formula;
       } else {
         nuevoProducto.proveedor = document.getElementById('prodProveedor').value.trim() || "Proveedor Externo";

@@ -229,7 +229,16 @@ const actualizarRankingTop5 = async () => {
       ? Object.values(dataProcesos).filter(p => p && Array.isArray(p.items))
       : [];
 
-    const productosMap = dataProductosInventario || {};
+    // Normalizar productos a un objeto { codigo: producto }
+    let productosMap = {};
+    if (dataProductosInventario) {
+      if (Array.isArray(dataProductosInventario)) {
+        productosMap = Object.fromEntries(dataProductosInventario.map(p => [p.codigo, p]));
+      } else if (typeof dataProductosInventario === 'object') {
+        // Si ya está en formato {codigo: producto} úsalo directamente
+        productosMap = dataProductosInventario;
+      }
+    }
 
     if (procesos.length === 0) {
       contenedorRanking.innerHTML = `<p>Aún no hay procesos de producción registrados.</p>`;
