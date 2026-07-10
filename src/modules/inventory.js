@@ -21,7 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
 async function cargarInventarioDesdeFirebase() {
   try {
     const data = await window.dataManager.getProductos();
-    listaProductosLocal = data ? Object.values(data) : [];
+
+    // Normalizar datos: si la respuesta es un objeto con claves como códigos,
+    // asegurarnos de que cada producto tenga el campo `codigo` para renderizar
+    if (!data) {
+      listaProductosLocal = [];
+    } else if (Array.isArray(data)) {
+      listaProductosLocal = data.map(p => (p && p.codigo) ? p : ({ ...(p || {}), codigo: p && p.codigo ? p.codigo : undefined }));
+    } else if (typeof data === 'object') {
+      // Si el objeto tiene campos típicos de un producto, tratarlo como un único producto
+      const sampleKeys = ['codigo', 'nombre', 'proveedor', 'stock', 'tipo'];
+      const hasProductFields = sampleKeys.some(k => Object.prototype.hasOwnProperty.call(data, k));
+      if (hasProductFields) {
+        listaProductosLocal = [{ codigo: data.codigo || 'SIN_CODIGO', ...data }];
+      } else {
+        // Si es un mapa de productos { codigo: producto }
+        listaProductosLocal = Object.entries(data).map(([key, val]) => {
+          const item = val || {};
+          return { codigo: item.codigo || key, ...item };
+        });
+      }
+    } else {
+      listaProductosLocal = [];
+    }
     renderizarTabla(listaProductosLocal);
   } catch (error) {
     console.error("Error al leer datos de Firebase:", error);
@@ -317,18 +339,18 @@ if (formProducto) {
     const stockIngresado = parseFloat(document.getElementById('prodStock').value);
 
       // Validaciones básicas: código, nombre, tipo y unidad requeridos
-      if (!codigo) return window.showToast("⚠️ El código del producto es obligatorio.", "error");
-      if (!nombre) return window.showToast("⚠️ El nombre del producto es obligatorio.", "error");
-      if (!tipo) return window.showToast("⚠️ Selecciona el tipo de producto.", "error");
-      if (!unidad) return window.showToast("⚠️ Selecciona la unidad de medida.", "error");
+      if (!codigo) return window.showToast(" El código del producto es obligatorio.", "error");
+      if (!nombre) return window.showToast(" El nombre del producto es obligatorio.", "error");
+      if (!tipo) return window.showToast(" Selecciona el tipo de producto.", "error");
+      if (!unidad) return window.showToast(" Selecciona la unidad de medida.", "error");
 
       if (!Number.isFinite(stockIngresado) || stockIngresado < 0) {
-        return window.showToast("⚠️ El stock no puede ser negativo.", "error");
+        return window.showToast(" El stock no puede ser negativo.", "error");
       }
 
     const productoExistente = listaProductosLocal.find(p => p && p.codigo === codigo);
     if (productoExistente && !esEdicion) {
-      return window.showToast(`💡 El producto ${codigo} ya existe. Usa los botones (+) / (-) para ajustar stock.`, "error");
+      return window.showToast(` El producto ${codigo} ya existe. Usa los botones (+) / (-) para ajustar stock.`, "error");
     }
 
     try {
@@ -362,10 +384,10 @@ if (formProducto) {
         });
 
         if (errorDuplicados) {
-          return window.showToast("⚠️ Tienes insumos repetidos en la fórmula.", "error");
+          return window.showToast(" Tienes insumos repetidos en la fórmula.", "error");
         }
 
-        if (formula.length === 0) return window.showToast("⚠️ Agrega al menos un insumo a la fórmula.", "error");
+        if (formula.length === 0) return window.showToast(" Agrega al menos un insumo a la fórmula.", "error");
         nuevoProducto.formula = formula;
       } else {
         nuevoProducto.proveedor = document.getElementById('prodProveedor').value.trim() || "Proveedor Externo";
@@ -373,7 +395,7 @@ if (formProducto) {
       }
 
       await window.dataManager.guardarProducto(codigo, nuevoProducto);
-      window.showToast(esEdicion ? "✅ Producto actualizado correctamente." : "✅ Producto registrado exitosamente.", "success");
+      window.showToast(esEdicion ? " Producto actualizado correctamente." : " Producto registrado exitosamente.", "success");
       limpiarFormulario();
       await cargarInventarioDesdeFirebase();
     } catch (error) {
